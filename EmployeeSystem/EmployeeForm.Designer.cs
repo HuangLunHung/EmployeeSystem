@@ -29,25 +29,25 @@
         private void InitializeComponent()
         {
             lblTitle = new Label();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            label5 = new Label();
-            label6 = new Label();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
-            button5 = new Button();
-            button6 = new Button();
+            lblEmpId = new Label();
+            lblEmpName = new Label();
+            lblDept = new Label();
+            lblJobTitle = new Label();
+            lblPhone = new Label();
+            lblNameSearch = new Label();
+            btnAdd = new Button();
+            btnUpdate = new Button();
+            btnDelete = new Button();
+            btnClear = new Button();
+            btnSearch = new Button();
+            btnRefresh = new Button();
             panel1 = new Panel();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            textBox5 = new TextBox();
-            textBox6 = new TextBox();
+            txtEmpId = new TextBox();
+            txtEmpName = new TextBox();
+            txtDept = new TextBox();
+            txtJobTitle = new TextBox();
+            txtPhone = new TextBox();
+            txtNameSearch = new TextBox();
             panel2 = new Panel();
             grpTool = new GroupBox();
             dataGridView1 = new DataGridView();
@@ -66,181 +66,181 @@
             lblTitle.TabIndex = 0;
             lblTitle.Text = "員工管理系統 (Employee Management Syst)em";
             // 
-            // label1
+            // lblEmpId
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(3, 4);
-            label1.Name = "label1";
-            label1.Size = new Size(51, 19);
-            label1.TabIndex = 1;
-            label1.Text = "label1";
+            lblEmpId.AutoSize = true;
+            lblEmpId.Location = new Point(3, 4);
+            lblEmpId.Name = "lblEmpId";
+            lblEmpId.Size = new Size(69, 19);
+            lblEmpId.TabIndex = 1;
+            lblEmpId.Text = "員工號碼";
             // 
-            // label2
+            // lblEmpName
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(3, 32);
-            label2.Name = "label2";
-            label2.Size = new Size(51, 19);
-            label2.TabIndex = 2;
-            label2.Text = "label2";
+            lblEmpName.AutoSize = true;
+            lblEmpName.Location = new Point(3, 32);
+            lblEmpName.Name = "lblEmpName";
+            lblEmpName.Size = new Size(39, 19);
+            lblEmpName.TabIndex = 2;
+            lblEmpName.Text = "姓名";
             // 
-            // label3
+            // lblDept
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(3, 60);
-            label3.Name = "label3";
-            label3.Size = new Size(51, 19);
-            label3.TabIndex = 3;
-            label3.Text = "label3";
+            lblDept.AutoSize = true;
+            lblDept.Location = new Point(3, 60);
+            lblDept.Name = "lblDept";
+            lblDept.Size = new Size(39, 19);
+            lblDept.TabIndex = 3;
+            lblDept.Text = "部門";
             // 
-            // label4
+            // lblJobTitle
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(3, 88);
-            label4.Name = "label4";
-            label4.Size = new Size(51, 19);
-            label4.TabIndex = 4;
-            label4.Text = "label4";
+            lblJobTitle.AutoSize = true;
+            lblJobTitle.Location = new Point(3, 88);
+            lblJobTitle.Name = "lblJobTitle";
+            lblJobTitle.Size = new Size(39, 19);
+            lblJobTitle.TabIndex = 4;
+            lblJobTitle.Text = "職稱";
             // 
-            // label5
+            // lblPhone
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(3, 116);
-            label5.Name = "label5";
-            label5.Size = new Size(51, 19);
-            label5.TabIndex = 5;
-            label5.Text = "label5";
+            lblPhone.AutoSize = true;
+            lblPhone.Location = new Point(3, 116);
+            lblPhone.Name = "lblPhone";
+            lblPhone.Size = new Size(39, 19);
+            lblPhone.TabIndex = 5;
+            lblPhone.Text = "電話";
             // 
-            // label6
+            // lblNameSearch
             // 
-            label6.AutoSize = true;
-            label6.Location = new Point(20, 14);
-            label6.Name = "label6";
-            label6.Size = new Size(51, 19);
-            label6.TabIndex = 6;
-            label6.Text = "label6";
+            lblNameSearch.AutoSize = true;
+            lblNameSearch.Location = new Point(3, 14);
+            lblNameSearch.Name = "lblNameSearch";
+            lblNameSearch.Size = new Size(69, 19);
+            lblNameSearch.TabIndex = 6;
+            lblNameSearch.Text = "查詢姓名";
             // 
-            // button1
+            // btnAdd
             // 
-            button1.Location = new Point(6, 23);
-            button1.Name = "button1";
-            button1.Size = new Size(94, 29);
-            button1.TabIndex = 7;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            btnAdd.Location = new Point(6, 23);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(94, 29);
+            btnAdd.TabIndex = 7;
+            btnAdd.Text = "新增";
+            btnAdd.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnUpdate
             // 
-            button2.Location = new Point(6, 53);
-            button2.Name = "button2";
-            button2.Size = new Size(94, 29);
-            button2.TabIndex = 8;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
+            btnUpdate.Location = new Point(6, 53);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new Size(94, 29);
+            btnUpdate.TabIndex = 8;
+            btnUpdate.Text = "修改";
+            btnUpdate.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnDelete
             // 
-            button3.Location = new Point(6, 81);
-            button3.Name = "button3";
-            button3.Size = new Size(94, 29);
-            button3.TabIndex = 9;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
+            btnDelete.Location = new Point(6, 81);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(94, 29);
+            btnDelete.TabIndex = 9;
+            btnDelete.Text = "刪除";
+            btnDelete.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btnClear
             // 
-            button4.Location = new Point(6, 109);
-            button4.Name = "button4";
-            button4.Size = new Size(94, 29);
-            button4.TabIndex = 10;
-            button4.Text = "button4";
-            button4.UseVisualStyleBackColor = true;
+            btnClear.Location = new Point(6, 109);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(94, 29);
+            btnClear.TabIndex = 10;
+            btnClear.Text = "清空";
+            btnClear.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // btnSearch
             // 
-            button5.Location = new Point(340, 11);
-            button5.Name = "button5";
-            button5.Size = new Size(94, 29);
-            button5.TabIndex = 11;
-            button5.Text = "button5";
-            button5.UseVisualStyleBackColor = true;
+            btnSearch.Location = new Point(244, 9);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(94, 29);
+            btnSearch.TabIndex = 11;
+            btnSearch.Text = "查詢";
+            btnSearch.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // btnRefresh
             // 
-            button6.Location = new Point(240, 11);
-            button6.Name = "button6";
-            button6.Size = new Size(94, 29);
-            button6.TabIndex = 12;
-            button6.Text = "button6";
-            button6.UseVisualStyleBackColor = true;
+            btnRefresh.Location = new Point(338, 9);
+            btnRefresh.Name = "btnRefresh";
+            btnRefresh.Size = new Size(94, 29);
+            btnRefresh.TabIndex = 12;
+            btnRefresh.Text = "重整";
+            btnRefresh.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
             panel1.BackColor = SystemColors.ActiveCaption;
-            panel1.Controls.Add(textBox5);
-            panel1.Controls.Add(textBox4);
-            panel1.Controls.Add(textBox3);
-            panel1.Controls.Add(textBox2);
-            panel1.Controls.Add(textBox1);
-            panel1.Controls.Add(label4);
-            panel1.Controls.Add(label1);
-            panel1.Controls.Add(label2);
-            panel1.Controls.Add(label3);
-            panel1.Controls.Add(label5);
+            panel1.Controls.Add(txtPhone);
+            panel1.Controls.Add(txtJobTitle);
+            panel1.Controls.Add(txtDept);
+            panel1.Controls.Add(txtEmpName);
+            panel1.Controls.Add(txtEmpId);
+            panel1.Controls.Add(lblJobTitle);
+            panel1.Controls.Add(lblEmpId);
+            panel1.Controls.Add(lblEmpName);
+            panel1.Controls.Add(lblDept);
+            panel1.Controls.Add(lblPhone);
             panel1.Location = new Point(0, 52);
             panel1.Name = "panel1";
             panel1.Size = new Size(334, 146);
             panel1.TabIndex = 13;
             // 
-            // textBox1
+            // txtEmpId
             // 
-            textBox1.Location = new Point(109, 1);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(125, 27);
-            textBox1.TabIndex = 6;
+            txtEmpId.Location = new Point(109, 1);
+            txtEmpId.Name = "txtEmpId";
+            txtEmpId.Size = new Size(125, 27);
+            txtEmpId.TabIndex = 6;
             // 
-            // textBox2
+            // txtEmpName
             // 
-            textBox2.Location = new Point(109, 29);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(125, 27);
-            textBox2.TabIndex = 7;
+            txtEmpName.Location = new Point(109, 29);
+            txtEmpName.Name = "txtEmpName";
+            txtEmpName.Size = new Size(125, 27);
+            txtEmpName.TabIndex = 7;
             // 
-            // textBox3
+            // txtDept
             // 
-            textBox3.Location = new Point(109, 57);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(125, 27);
-            textBox3.TabIndex = 8;
+            txtDept.Location = new Point(109, 57);
+            txtDept.Name = "txtDept";
+            txtDept.Size = new Size(125, 27);
+            txtDept.TabIndex = 8;
             // 
-            // textBox4
+            // txtJobTitle
             // 
-            textBox4.Location = new Point(109, 85);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(125, 27);
-            textBox4.TabIndex = 9;
+            txtJobTitle.Location = new Point(109, 85);
+            txtJobTitle.Name = "txtJobTitle";
+            txtJobTitle.Size = new Size(125, 27);
+            txtJobTitle.TabIndex = 9;
             // 
-            // textBox5
+            // txtPhone
             // 
-            textBox5.Location = new Point(109, 113);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(125, 27);
-            textBox5.TabIndex = 10;
+            txtPhone.Location = new Point(109, 113);
+            txtPhone.Name = "txtPhone";
+            txtPhone.Size = new Size(125, 27);
+            txtPhone.TabIndex = 10;
             // 
-            // textBox6
+            // txtNameSearch
             // 
-            textBox6.Location = new Point(77, 11);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(157, 27);
-            textBox6.TabIndex = 11;
+            txtNameSearch.Location = new Point(77, 11);
+            txtNameSearch.Name = "txtNameSearch";
+            txtNameSearch.Size = new Size(157, 27);
+            txtNameSearch.TabIndex = 11;
             // 
             // panel2
             // 
             panel2.BackColor = SystemColors.InactiveCaption;
-            panel2.Controls.Add(button5);
-            panel2.Controls.Add(textBox6);
-            panel2.Controls.Add(label6);
-            panel2.Controls.Add(button6);
+            panel2.Controls.Add(btnSearch);
+            panel2.Controls.Add(txtNameSearch);
+            panel2.Controls.Add(lblNameSearch);
+            panel2.Controls.Add(btnRefresh);
             panel2.Location = new Point(0, 204);
             panel2.Name = "panel2";
             panel2.Size = new Size(445, 47);
@@ -248,10 +248,10 @@
             // 
             // grpTool
             // 
-            grpTool.Controls.Add(button3);
-            grpTool.Controls.Add(button1);
-            grpTool.Controls.Add(button2);
-            grpTool.Controls.Add(button4);
+            grpTool.Controls.Add(btnDelete);
+            grpTool.Controls.Add(btnAdd);
+            grpTool.Controls.Add(btnUpdate);
+            grpTool.Controls.Add(btnClear);
             grpTool.ForeColor = SystemColors.ControlText;
             grpTool.Location = new Point(340, 53);
             grpTool.Name = "grpTool";
@@ -294,25 +294,25 @@
         #endregion
 
         private Label lblTitle;
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Label label4;
-        private Label label5;
-        private Label label6;
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
-        private Button button5;
-        private Button button6;
+        private Label lblEmpId;
+        private Label lblEmpName;
+        private Label lblDept;
+        private Label lblJobTitle;
+        private Label lblPhone;
+        private Label lblNameSearch;
+        private Button btnAdd;
+        private Button btnUpdate;
+        private Button btnDelete;
+        private Button btnClear;
+        private Button btnSearch;
+        private Button btnRefresh;
         private Panel panel1;
-        private TextBox textBox5;
-        private TextBox textBox4;
-        private TextBox textBox3;
-        private TextBox textBox2;
-        private TextBox textBox1;
-        private TextBox textBox6;
+        private TextBox txtPhone;
+        private TextBox txtJobTitle;
+        private TextBox txtDept;
+        private TextBox txtEmpName;
+        private TextBox txtEmpId;
+        private TextBox txtNameSearch;
         private Panel panel2;
         private GroupBox grpTool;
         private DataGridView dataGridView1;
