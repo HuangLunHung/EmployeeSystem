@@ -28,12 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "EmployeeForm";
+            lblTitle = new Label();
+            SuspendLayout();
+            // 
+            // lblTitle
+            // 
+            lblTitle.AutoSize = true;
+            lblTitle.Location = new Point(321, 9);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(333, 19);
+            lblTitle.TabIndex = 0;
+            lblTitle.Text = "員工管理系統 (Employee Management Syst)em";
+            // 
+            // EmployeeForm
+            // 
+            AutoScaleDimensions = new SizeF(9F, 19F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(982, 653);
+            Controls.Add(lblTitle);
+            Name = "EmployeeForm";
+            Text = "EmployeeForm";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private Label lblTitle;
     }
 }
