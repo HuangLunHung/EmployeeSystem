@@ -50,11 +50,11 @@
             txtNameSearch = new TextBox();
             panel2 = new Panel();
             grpTool = new GroupBox();
-            dataGridView1 = new DataGridView();
+            dgvEmployees = new DataGridView();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             grpTool.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvEmployees).BeginInit();
             SuspendLayout();
             // 
             // lblTitle
@@ -260,33 +260,35 @@
             grpTool.TabStop = false;
             grpTool.Text = "Tool";
             // 
-            // dataGridView1
+            // dgvEmployees
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(0, 250);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(984, 403);
-            dataGridView1.TabIndex = 16;
+            dgvEmployees.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvEmployees.Location = new Point(0, 250);
+            dgvEmployees.Name = "dgvEmployees";
+            dgvEmployees.RowHeadersWidth = 51;
+            dgvEmployees.Size = new Size(984, 403);
+            dgvEmployees.TabIndex = 16;
+            dgvEmployees.CellContentClick += dgvEmployees_CellContentClick;
             // 
             // EmployeeForm
             // 
             AutoScaleDimensions = new SizeF(9F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(982, 653);
-            Controls.Add(dataGridView1);
+            Controls.Add(dgvEmployees);
             Controls.Add(grpTool);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(lblTitle);
             Name = "EmployeeForm";
             Text = "EmployeeForm";
+            Load += EmployeeForm_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             grpTool.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvEmployees).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -315,6 +317,6 @@
         private TextBox txtNameSearch;
         private Panel panel2;
         private GroupBox grpTool;
-        private DataGridView dataGridView1;
+        private DataGridView dgvEmployees;
     }
 }
