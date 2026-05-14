@@ -90,5 +90,16 @@ namespace EmployeeSystem
             row.Cells[4].Value = txtPhone.Text;
             MessageBox.Show("修改成功");
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if(dgvEmployees.CurrentRow == null)
+            {
+                MessageBox.Show("請先點選要修改的資料!");
+                return;
+            }
+            dgvEmployees.Rows.Remove(dgvEmployees.CurrentRow);
+            MessageBox.Show("刪除成功!");
+        }
     }
 }
