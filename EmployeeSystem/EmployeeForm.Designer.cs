@@ -42,11 +42,11 @@
             btnSearch = new Button();
             btnRefresh = new Button();
             panel1 = new Panel();
-            txtEmpId = new TextBox();
-            txtEmpName = new TextBox();
-            txtDept = new TextBox();
-            txtJobTitle = new TextBox();
             txtPhone = new TextBox();
+            txtJobTitle = new TextBox();
+            txtDept = new TextBox();
+            txtEmpName = new TextBox();
+            txtEmpId = new TextBox();
             txtNameSearch = new TextBox();
             panel2 = new Panel();
             grpTool = new GroupBox();
@@ -128,6 +128,7 @@
             btnAdd.TabIndex = 7;
             btnAdd.Text = "新增";
             btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
             // 
             // btnUpdate
             // 
@@ -192,26 +193,12 @@
             panel1.Size = new Size(334, 146);
             panel1.TabIndex = 13;
             // 
-            // txtEmpId
+            // txtPhone
             // 
-            txtEmpId.Location = new Point(109, 1);
-            txtEmpId.Name = "txtEmpId";
-            txtEmpId.Size = new Size(125, 27);
-            txtEmpId.TabIndex = 6;
-            // 
-            // txtEmpName
-            // 
-            txtEmpName.Location = new Point(109, 29);
-            txtEmpName.Name = "txtEmpName";
-            txtEmpName.Size = new Size(125, 27);
-            txtEmpName.TabIndex = 7;
-            // 
-            // txtDept
-            // 
-            txtDept.Location = new Point(109, 57);
-            txtDept.Name = "txtDept";
-            txtDept.Size = new Size(125, 27);
-            txtDept.TabIndex = 8;
+            txtPhone.Location = new Point(109, 113);
+            txtPhone.Name = "txtPhone";
+            txtPhone.Size = new Size(125, 27);
+            txtPhone.TabIndex = 10;
             // 
             // txtJobTitle
             // 
@@ -220,12 +207,26 @@
             txtJobTitle.Size = new Size(125, 27);
             txtJobTitle.TabIndex = 9;
             // 
-            // txtPhone
+            // txtDept
             // 
-            txtPhone.Location = new Point(109, 113);
-            txtPhone.Name = "txtPhone";
-            txtPhone.Size = new Size(125, 27);
-            txtPhone.TabIndex = 10;
+            txtDept.Location = new Point(109, 57);
+            txtDept.Name = "txtDept";
+            txtDept.Size = new Size(125, 27);
+            txtDept.TabIndex = 8;
+            // 
+            // txtEmpName
+            // 
+            txtEmpName.Location = new Point(109, 29);
+            txtEmpName.Name = "txtEmpName";
+            txtEmpName.Size = new Size(125, 27);
+            txtEmpName.TabIndex = 7;
+            // 
+            // txtEmpId
+            // 
+            txtEmpId.Location = new Point(109, 1);
+            txtEmpId.Name = "txtEmpId";
+            txtEmpId.Size = new Size(125, 27);
+            txtEmpId.TabIndex = 6;
             // 
             // txtNameSearch
             // 
@@ -263,10 +264,10 @@
             // dgvEmployees
             // 
             dgvEmployees.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvEmployees.Location = new Point(0, 250);
+            dgvEmployees.Location = new Point(0, 248);
             dgvEmployees.Name = "dgvEmployees";
             dgvEmployees.RowHeadersWidth = 51;
-            dgvEmployees.Size = new Size(984, 403);
+            dgvEmployees.Size = new Size(981, 405);
             dgvEmployees.TabIndex = 16;
             dgvEmployees.CellContentClick += dgvEmployees_CellContentClick;
             // 

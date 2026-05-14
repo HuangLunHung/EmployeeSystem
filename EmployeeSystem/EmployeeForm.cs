@@ -35,5 +35,28 @@ namespace EmployeeSystem
             dgvEmployees.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvEmployees.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            string EmpId = txtEmpId.Text;
+            string EmpName = txtEmpName.Text;
+            string Dept = txtDept.Text;
+            string JobTitle = txtJobTitle.Text;
+            string Phone = txtPhone.Text;
+
+            if (EmpId == "" || EmpName == "" || Dept == "" || JobTitle == "" || Phone == "")
+            {
+                MessageBox.Show("請輸入完整資料!");
+                return;
+            }
+            dgvEmployees.Rows.Add(EmpId, EmpName, Dept, JobTitle, Phone);
+
+            txtEmpId.Clear();
+            txtEmpName.Clear();
+            txtDept.Clear();
+            txtJobTitle.Clear();
+            txtPhone.Clear();
+            txtEmpId.Focus();
+        }
     }
 }
