@@ -62,7 +62,7 @@ namespace EmployeeSystem
 
         private void dgvEmployees_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex >= 0)
+            if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvEmployees.Rows[e.RowIndex];
 
@@ -73,6 +73,22 @@ namespace EmployeeSystem
                 txtPhone.Text = row.Cells[4].Value.ToString();
             }
 
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (dgvEmployees.CurrentRow == null)
+            {
+                MessageBox.Show("請先點選要修改的資料!");
+                return;
+            }
+            DataGridViewRow row = dgvEmployees.CurrentRow;
+            row.Cells[0].Value = txtEmpId.Text;
+            row.Cells[1].Value = txtEmpName.Text;
+            row.Cells[2].Value = txtDept.Text;
+            row.Cells[3].Value = txtJobTitle.Text;
+            row.Cells[4].Value = txtPhone.Text;
+            MessageBox.Show("修改成功");
         }
     }
 }
