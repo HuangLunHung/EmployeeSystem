@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace EmployeeSystem
 {
@@ -57,6 +58,21 @@ namespace EmployeeSystem
             txtJobTitle.Clear();
             txtPhone.Clear();
             txtEmpId.Focus();
+        }
+
+        private void dgvEmployees_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvEmployees.Rows[e.RowIndex];
+
+                txtEmpId.Text = row.Cells[0].Value.ToString();
+                txtEmpName.Text = row.Cells[1].Value.ToString();
+                txtDept.Text = row.Cells[2].Value.ToString();
+                txtJobTitle.Text = row.Cells[3].Value.ToString();
+                txtPhone.Text = row.Cells[4].Value.ToString();
+            }
+
         }
     }
 }
