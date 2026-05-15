@@ -105,8 +105,8 @@ namespace EmployeeSystem
         private void btnSearch_Click(object sender, EventArgs e)
         {
             string keyword = txtNameSearch.Text;
-            
-            foreach(DataGridViewRow row in dgvEmployees.Rows)
+
+            foreach (DataGridViewRow row in dgvEmployees.Rows)
             {
                 if (row.IsNewRow)
                 {
@@ -122,6 +122,19 @@ namespace EmployeeSystem
                     row.Visible = false;
                 }
             }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            foreach(DataGridViewRow row  in dgvEmployees.Rows)
+            {
+                if (row.IsNewRow) ;
+                if(row.Visible == false)
+                {
+                    row.Visible = true;
+                }
+            }
+            txtNameSearch.Clear();
         }
     }
 }

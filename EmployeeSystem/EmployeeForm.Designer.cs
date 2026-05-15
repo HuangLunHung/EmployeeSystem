@@ -177,6 +177,7 @@
             btnRefresh.TabIndex = 12;
             btnRefresh.Text = "重整";
             btnRefresh.UseVisualStyleBackColor = true;
+            btnRefresh.Click += btnRefresh_Click;
             // 
             // panel1
             // 
