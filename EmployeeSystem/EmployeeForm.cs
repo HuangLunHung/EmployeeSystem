@@ -126,15 +126,25 @@ namespace EmployeeSystem
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            foreach(DataGridViewRow row  in dgvEmployees.Rows)
+            foreach (DataGridViewRow row in dgvEmployees.Rows)
             {
                 if (row.IsNewRow) ;
-                if(row.Visible == false)
+                if (row.Visible == false)
                 {
                     row.Visible = true;
                 }
             }
             txtNameSearch.Clear();
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            txtEmpId.Clear();
+            txtEmpName.Clear();
+            txtDept.Clear();
+            txtJobTitle.Clear();
+            txtPhone.Clear();
+            txtEmpId.Focus();
         }
     }
 }

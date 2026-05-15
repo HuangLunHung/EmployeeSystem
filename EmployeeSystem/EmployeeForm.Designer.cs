@@ -158,6 +158,7 @@
             btnClear.TabIndex = 10;
             btnClear.Text = "清空";
             btnClear.UseVisualStyleBackColor = true;
+            btnClear.Click += btnClear_Click;
             // 
             // btnSearch
             // 
