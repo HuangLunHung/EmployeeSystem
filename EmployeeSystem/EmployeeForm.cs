@@ -8,11 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using System.Data.SQLite;
 
 namespace EmployeeSystem
 {
     public partial class EmployeeForm : Form
     {
+        string connectionString = "Data Source=employees.db"; 
         public EmployeeForm()
         {
             InitializeComponent();
@@ -25,6 +27,7 @@ namespace EmployeeSystem
 
         private void EmployeeForm_Load(object sender, EventArgs e)
         {
+            CreateTable();
             dgvEmployees.Columns.Clear();
 
             dgvEmployees.Columns.Add("colEmpId", "員工編號");
@@ -35,6 +38,25 @@ namespace EmployeeSystem
 
             dgvEmployees.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvEmployees.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        }
+        private void CreateTable()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+
+                string sql = @"
+                CREATE TABLE IF NOT EXISTS Employees (
+                    EmpId TEXT PRIMARY KEY,
+                    EmpName TEXT,
+                    Dept TEXT,
+                    JobTitle TEXT,
+                    Phone TEXT
+                )";
+
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
