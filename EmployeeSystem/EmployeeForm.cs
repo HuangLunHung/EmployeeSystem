@@ -93,13 +93,35 @@ namespace EmployeeSystem
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if(dgvEmployees.CurrentRow == null)
+            if (dgvEmployees.CurrentRow == null)
             {
                 MessageBox.Show("請先點選要修改的資料!");
                 return;
             }
             dgvEmployees.Rows.Remove(dgvEmployees.CurrentRow);
             MessageBox.Show("刪除成功!");
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            string keyword = txtNameSearch.Text;
+            
+            foreach(DataGridViewRow row in dgvEmployees.Rows)
+            {
+                if (row.IsNewRow)
+                {
+                    continue;
+                }
+                string name = row.Cells[1].Value.ToString();
+                if (name.Contains(keyword))
+                {
+                    row.Visible = true;
+                }
+                else
+                {
+                    row.Visible = false;
+                }
+            }
         }
     }
 }

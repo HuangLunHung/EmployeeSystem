@@ -167,6 +167,7 @@
             btnSearch.TabIndex = 11;
             btnSearch.Text = "查詢";
             btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
             // btnRefresh
             // 
