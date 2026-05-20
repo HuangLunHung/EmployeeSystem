@@ -38,6 +38,8 @@ namespace EmployeeSystem
 
             dgvEmployees.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvEmployees.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            // ⭐新增
+            LoadData();
         }
         private void CreateTable()
         {
@@ -58,7 +60,33 @@ namespace EmployeeSystem
                 cmd.ExecuteNonQuery();
             }
         }
+        // ⭐新增
+        private void LoadData()
+        {
+            dgvEmployees.Rows.Clear();
 
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+
+                string sql = "SELECT * FROM Employees";
+
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+
+                SQLiteDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    dgvEmployees.Rows.Add(
+                        reader["EmpId"].ToString(),
+                        reader["EmpName"].ToString(),
+                        reader["Dept"].ToString(),
+                        reader["JobTitle"].ToString(),
+                        reader["Phone"].ToString()
+                    );
+                }
+            }
+        }
         private void btnAdd_Click(object sender, EventArgs e)
         {
             string EmpId = txtEmpId.Text;
@@ -72,7 +100,28 @@ namespace EmployeeSystem
                 MessageBox.Show("請輸入完整資料!");
                 return;
             }
-            dgvEmployees.Rows.Add(EmpId, EmpName, Dept, JobTitle, Phone);
+            // ⭐新增
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+
+                string sql = @"
+                INSERT INTO Employees (EmpId, EmpName, Dept, JobTitle, Phone)
+                VALUES (@EmpId, @EmpName, @Dept, @JobTitle, @Phone)";
+
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@EmpId", EmpId);
+                cmd.Parameters.AddWithValue("@EmpName", EmpName);
+                cmd.Parameters.AddWithValue("@Dept", Dept);
+                cmd.Parameters.AddWithValue("@JobTitle", JobTitle);
+                cmd.Parameters.AddWithValue("@Phone", Phone);
+
+                cmd.ExecuteNonQuery();
+            }
+
+            // ⭐新增
+            LoadData();
 
             txtEmpId.Clear();
             txtEmpName.Clear();
