@@ -14,7 +14,7 @@ namespace EmployeeSystem
 {
     public partial class EmployeeForm : Form
     {
-        string connectionString = "Data Source=employees.db"; 
+        string connectionString = "Data Source=employees.db";
         public EmployeeForm()
         {
             InitializeComponent();
@@ -169,12 +169,47 @@ namespace EmployeeSystem
                 MessageBox.Show("請先點選要修改的資料!");
                 return;
             }
-            DataGridViewRow row = dgvEmployees.CurrentRow;
-            row.Cells[0].Value = txtEmpId.Text;
-            row.Cells[1].Value = txtEmpName.Text;
-            row.Cells[2].Value = txtDept.Text;
-            row.Cells[3].Value = txtJobTitle.Text;
-            row.Cells[4].Value = txtPhone.Text;
+
+            // 取得目前欄位的值
+            string empId = txtEmpId.Text;
+            string empName = txtEmpName.Text;
+            string dept = txtDept.Text;
+            string jobTitle = txtJobTitle.Text;
+            string phone = txtPhone.Text;
+
+            // 檢查欄位是否填寫完整
+            if (empId == "" || empName == "" || dept == "" || jobTitle == "" || phone == "")
+            {
+                MessageBox.Show("請輸入完整資料!");
+                return;
+            }
+
+            // 用 UPDATE SQL 更新資料庫
+            txtEmpId.ReadOnly = true;
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+                MessageBox.Show(empId);
+                string sql = @"
+                    UPDATE Employees
+                    SET EmpName = @EmpName,
+                        Dept = @Dept,
+                        JobTitle = @JobTitle,
+                        Phone = @Phone
+                    WHERE EmpId = @EmpId";
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@EmpName", empName);
+                    cmd.Parameters.AddWithValue("@Dept", dept);
+                    cmd.Parameters.AddWithValue("@JobTitle", jobTitle);
+                    cmd.Parameters.AddWithValue("@Phone", phone);
+                    cmd.Parameters.AddWithValue("@EmpId", empId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            // 重新載入資料
+            LoadData();
             MessageBox.Show("修改成功");
         }
 
@@ -250,6 +285,11 @@ namespace EmployeeSystem
             txtJobTitle.Clear();
             txtPhone.Clear();
             txtEmpId.Focus();
+        }
+
+        private void lblEmpId_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

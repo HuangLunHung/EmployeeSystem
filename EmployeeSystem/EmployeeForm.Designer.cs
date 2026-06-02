@@ -74,6 +74,7 @@
             lblEmpId.Size = new Size(69, 19);
             lblEmpId.TabIndex = 1;
             lblEmpId.Text = "員工號碼";
+            lblEmpId.Click += lblEmpId_Click;
             // 
             // lblEmpName
             // 
