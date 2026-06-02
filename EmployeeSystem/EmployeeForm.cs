@@ -27,6 +27,7 @@ namespace EmployeeSystem
 
         private void EmployeeForm_Load(object sender, EventArgs e)
         {
+            //ClearDatabase();
             CreateTable();
             dgvEmployees.Columns.Clear();
 
@@ -41,6 +42,19 @@ namespace EmployeeSystem
             // ⭐新增
             LoadData();
         }
+        /*private void ClearDatabase()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+
+                string sql = "DELETE FROM Employees";
+
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+
+                cmd.ExecuteNonQuery();
+            }
+        }*/
         private void CreateTable()
         {
             using (SQLiteConnection conn = new SQLiteConnection(connectionString))
@@ -60,7 +74,9 @@ namespace EmployeeSystem
                 cmd.ExecuteNonQuery();
             }
         }
+
         // ⭐新增
+        //private 修飾符確保 LoadData 方法只能在 EmployeeForm 類別內部被呼叫
         private void LoadData()
         {
             dgvEmployees.Rows.Clear();
@@ -164,12 +180,30 @@ namespace EmployeeSystem
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            // 1. 檢查是否有選取資料列
             if (dgvEmployees.CurrentRow == null)
             {
-                MessageBox.Show("請先點選要修改的資料!");
+                MessageBox.Show("請先點選要刪除的資料!");
                 return;
             }
-            dgvEmployees.Rows.Remove(dgvEmployees.CurrentRow);
+
+            // 2. 取得選取列的員工編號（EmpId 是主鍵）
+            string empId = dgvEmployees.CurrentRow.Cells[0].Value.ToString();
+
+            // 3. 建立 SQLite 連線並執行刪除
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+                string sql = "DELETE FROM Employees WHERE EmpId = @EmpId";
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@EmpId", empId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            // 4. 刪除後重新載入資料
+            LoadData();
             MessageBox.Show("刪除成功!");
         }
 
