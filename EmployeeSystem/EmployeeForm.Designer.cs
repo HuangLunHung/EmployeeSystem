@@ -64,7 +64,8 @@
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(333, 19);
             lblTitle.TabIndex = 0;
-            lblTitle.Text = "員工管理系統 (Employee Management Syst)em";
+            lblTitle.Text = "員工管理系統 (Employee Management System)";
+            lblTitle.Click += lblTitle_Click;
             // 
             // lblEmpId
             // 
