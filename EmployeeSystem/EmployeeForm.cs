@@ -15,6 +15,7 @@ namespace EmployeeSystem
     public partial class EmployeeForm : Form
     {
         string connectionString = "Data Source=employees.db";
+
         public EmployeeForm()
         {
             InitializeComponent();
@@ -27,7 +28,6 @@ namespace EmployeeSystem
 
         private void EmployeeForm_Load(object sender, EventArgs e)
         {
-            //ClearDatabase();
             CreateTable();
             dgvEmployees.Columns.Clear();
 
@@ -39,112 +39,110 @@ namespace EmployeeSystem
 
             dgvEmployees.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvEmployees.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            // ⭐新增
+
             LoadData();
         }
-        /*private void ClearDatabase()
-        {
-            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
-            {
-                conn.Open();
 
-                string sql = "DELETE FROM Employees";
-
-                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
-
-                cmd.ExecuteNonQuery();
-            }
-        }*/
         private void CreateTable()
         {
-            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            try
             {
-                conn.Open();
-
-                string sql = @"
-                CREATE TABLE IF NOT EXISTS Employees (
-                    EmpId TEXT PRIMARY KEY,
-                    EmpName TEXT,
-                    Dept TEXT,
-                    JobTitle TEXT,
-                    Phone TEXT
-                )";
-
-                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-            }
-        }
-
-        // ⭐新增
-        //private 修飾符確保 LoadData 方法只能在 EmployeeForm 類別內部被呼叫
-        private void LoadData()
-        {
-            dgvEmployees.Rows.Clear();
-
-            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
-            {
-                conn.Open();
-
-                string sql = "SELECT * FROM Employees";
-
-                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
-
-                SQLiteDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
+                using (SQLiteConnection conn = new SQLiteConnection(connectionString))
                 {
-                    dgvEmployees.Rows.Add(
-                        reader["EmpId"].ToString(),
-                        reader["EmpName"].ToString(),
-                        reader["Dept"].ToString(),
-                        reader["JobTitle"].ToString(),
-                        reader["Phone"].ToString()
-                    );
+                    conn.Open();
+
+                    string sql = @"
+                    CREATE TABLE IF NOT EXISTS Employees (
+                        EmpId TEXT PRIMARY KEY,
+                        EmpName TEXT,
+                        Dept TEXT,
+                        JobTitle TEXT,
+                        Phone TEXT
+                    )";
+
+                    SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+                    cmd.ExecuteNonQuery();
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("資料表建立失敗：" + ex.Message);
+            }
         }
+
+        private void LoadData()
+        {
+            try
+            {
+                dgvEmployees.Rows.Clear();
+
+                using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string sql = "SELECT * FROM Employees";
+                    SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+                    SQLiteDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        dgvEmployees.Rows.Add(
+                            reader["EmpId"].ToString(),
+                            reader["EmpName"].ToString(),
+                            reader["Dept"].ToString(),
+                            reader["JobTitle"].ToString(),
+                            reader["Phone"].ToString()
+                        );
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("資料載入失敗：" + ex.Message);
+            }
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            string EmpId = txtEmpId.Text;
-            string EmpName = txtEmpName.Text;
-            string Dept = txtDept.Text;
-            string JobTitle = txtJobTitle.Text;
-            string Phone = txtPhone.Text;
+            string empId = txtEmpId.Text.Trim();
+            string empName = txtEmpName.Text.Trim();
+            string dept = txtDept.Text.Trim();
+            string jobTitle = txtJobTitle.Text.Trim();
+            string phone = txtPhone.Text.Trim();
 
-            if (EmpId == "" || EmpName == "" || Dept == "" || JobTitle == "" || Phone == "")
+            if (empId == "" || empName == "" || dept == "" || jobTitle == "" || phone == "")
             {
                 MessageBox.Show("請輸入完整資料!");
                 return;
             }
-            // ⭐新增
-            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+
+            try
             {
-                conn.Open();
+                using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+                {
+                    conn.Open();
 
-                string sql = @"
-                INSERT INTO Employees (EmpId, EmpName, Dept, JobTitle, Phone)
-                VALUES (@EmpId, @EmpName, @Dept, @JobTitle, @Phone)";
+                    string sql = @"
+                    INSERT INTO Employees (EmpId, EmpName, Dept, JobTitle, Phone)
+                    VALUES (@EmpId, @EmpName, @Dept, @JobTitle, @Phone)";
 
-                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+                    SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@EmpId", empId);
+                    cmd.Parameters.AddWithValue("@EmpName", empName);
+                    cmd.Parameters.AddWithValue("@Dept", dept);
+                    cmd.Parameters.AddWithValue("@JobTitle", jobTitle);
+                    cmd.Parameters.AddWithValue("@Phone", phone);
+                    cmd.ExecuteNonQuery();
+                }
 
-                cmd.Parameters.AddWithValue("@EmpId", EmpId);
-                cmd.Parameters.AddWithValue("@EmpName", EmpName);
-                cmd.Parameters.AddWithValue("@Dept", Dept);
-                cmd.Parameters.AddWithValue("@JobTitle", JobTitle);
-                cmd.Parameters.AddWithValue("@Phone", Phone);
-
-                cmd.ExecuteNonQuery();
+                LoadData();
+                ClearFields();
+                MessageBox.Show("新增成功!");
             }
-
-            // ⭐新增
-            LoadData();
-
-            txtEmpId.Clear();
-            txtEmpName.Clear();
-            txtDept.Clear();
-            txtJobTitle.Clear();
-            txtPhone.Clear();
-            txtEmpId.Focus();
+            catch (Exception ex)
+            {
+                MessageBox.Show("新增失敗：" + ex.Message);
+            }
         }
 
         private void dgvEmployees_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -158,8 +156,8 @@ namespace EmployeeSystem
                 txtDept.Text = row.Cells[2].Value.ToString();
                 txtJobTitle.Text = row.Cells[3].Value.ToString();
                 txtPhone.Text = row.Cells[4].Value.ToString();
+                txtEmpId.ReadOnly = true;
             }
-
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -170,97 +168,105 @@ namespace EmployeeSystem
                 return;
             }
 
-            // 取得目前欄位的值
-            string empId = txtEmpId.Text;
-            string empName = txtEmpName.Text;
-            string dept = txtDept.Text;
-            string jobTitle = txtJobTitle.Text;
-            string phone = txtPhone.Text;
+            string empId = txtEmpId.Text.Trim();
+            string empName = txtEmpName.Text.Trim();
+            string dept = txtDept.Text.Trim();
+            string jobTitle = txtJobTitle.Text.Trim();
+            string phone = txtPhone.Text.Trim();
 
-            // 檢查欄位是否填寫完整
             if (empId == "" || empName == "" || dept == "" || jobTitle == "" || phone == "")
             {
                 MessageBox.Show("請輸入完整資料!");
                 return;
             }
 
-            // 用 UPDATE SQL 更新資料庫
-            txtEmpId.ReadOnly = true;
-            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            try
             {
-                conn.Open();
-                MessageBox.Show(empId);
-                string sql = @"
+                //txtEmpId.ReadOnly = true;
+
+                using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string sql = @"
                     UPDATE Employees
                     SET EmpName = @EmpName,
                         Dept = @Dept,
                         JobTitle = @JobTitle,
                         Phone = @Phone
                     WHERE EmpId = @EmpId";
-                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
-                {
-                    cmd.Parameters.AddWithValue("@EmpName", empName);
-                    cmd.Parameters.AddWithValue("@Dept", dept);
-                    cmd.Parameters.AddWithValue("@JobTitle", jobTitle);
-                    cmd.Parameters.AddWithValue("@Phone", phone);
-                    cmd.Parameters.AddWithValue("@EmpId", empId);
-                    cmd.ExecuteNonQuery();
-                }
-            }
 
-            // 重新載入資料
-            LoadData();
-            MessageBox.Show("修改成功");
+                    using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@EmpName", empName);
+                        cmd.Parameters.AddWithValue("@Dept", dept);
+                        cmd.Parameters.AddWithValue("@JobTitle", jobTitle);
+                        cmd.Parameters.AddWithValue("@Phone", phone);
+                        cmd.Parameters.AddWithValue("@EmpId", empId);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                LoadData();
+                MessageBox.Show("修改成功!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("修改失敗：" + ex.Message);
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            // 1. 檢查是否有選取資料列
             if (dgvEmployees.CurrentRow == null)
             {
                 MessageBox.Show("請先點選要刪除的資料!");
                 return;
             }
 
-            // 2. 取得選取列的員工編號（EmpId 是主鍵）
             string empId = dgvEmployees.CurrentRow.Cells[0].Value.ToString();
 
-            // 3. 建立 SQLite 連線並執行刪除
-            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
-            {
-                conn.Open();
-                string sql = "DELETE FROM Employees WHERE EmpId = @EmpId";
-                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
-                {
-                    cmd.Parameters.AddWithValue("@EmpId", empId);
-                    cmd.ExecuteNonQuery();
-                }
-            }
+            DialogResult confirm = MessageBox.Show(
+                "確定要刪除這筆資料嗎?",
+                "確認刪除",
+                MessageBoxButtons.YesNo
+            );
+            if (confirm != DialogResult.Yes) return;
 
-            // 4. 刪除後重新載入資料
-            LoadData();
-            MessageBox.Show("刪除成功!");
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string sql = "DELETE FROM Employees WHERE EmpId = @EmpId";
+
+                    using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@EmpId", empId);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                LoadData();
+                MessageBox.Show("刪除成功!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("刪除失敗：" + ex.Message);
+            }
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            string keyword = txtNameSearch.Text;
+            string keyword = txtNameSearch.Text.Trim();
 
             foreach (DataGridViewRow row in dgvEmployees.Rows)
             {
-                if (row.IsNewRow)
-                {
-                    continue;
-                }
+                if (row.IsNewRow) continue;
+
                 string name = row.Cells[1].Value.ToString();
-                if (name.Contains(keyword))
-                {
-                    row.Visible = true;
-                }
-                else
-                {
-                    row.Visible = false;
-                }
+                row.Visible = name.Contains(keyword);
             }
         }
 
@@ -268,22 +274,26 @@ namespace EmployeeSystem
         {
             foreach (DataGridViewRow row in dgvEmployees.Rows)
             {
-                if (row.IsNewRow) ;
-                if (row.Visible == false)
-                {
-                    row.Visible = true;
-                }
+                if (row.IsNewRow) continue;
+                row.Visible = true;
             }
             txtNameSearch.Clear();
         }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
+            ClearFields();
+        }
+
+        // 抽成獨立方法，避免重複寫清空邏輯
+        private void ClearFields()
+        {
             txtEmpId.Clear();
             txtEmpName.Clear();
             txtDept.Clear();
             txtJobTitle.Clear();
             txtPhone.Clear();
+            txtEmpId.ReadOnly = false;
             txtEmpId.Focus();
         }
 
