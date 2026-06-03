@@ -26,19 +26,19 @@
 ## 畫面截圖
 
 ### 主畫面
-![主畫面](images/main.png)
+![主畫面](images/image/main.png)
 
 ### 新增員工
-![新增員工](images/add.png)
+![新增員工](images/image/add.png)
 
 ### 修改員工資料
-![修改](images/update.png)
+![修改](images/image/update.png)
 
 ### 搜尋功能
-![搜尋](images/search.png)
+![搜尋](images/image/search.png)
 
 ### 刪除確認
-![刪除確認](images/delete.png)
+![刪除確認](images/image/delete.png)
 
 ---
 
